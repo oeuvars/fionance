@@ -5,13 +5,13 @@ import {
     SheetHeader,
     SheetTitle,
 } from '@/components/ui/sheet';
-import { useNewAccount } from '../hooks/use-new-account';
-import { AccountForm, FormValues } from './account-form';
-import { useCreateAccount } from '../api/use-create-account';
+import { useNewCategory } from '../hooks/use-new-category';
+import { CategoryForm, FormValues } from './category-form';
+import { useCreateCategory } from '../api/use-create-category';
 
-export const NewAccountSheet = () => {
-    const { isOpen, onClose } = useNewAccount();
-    const mutation = useCreateAccount();
+export const NewCategorySheet = () => {
+    const { isOpen, onClose } = useNewCategory();
+    const mutation = useCreateCategory();
 
     const onSubmit = (values: FormValues) => {
         mutation.mutate(values, {
@@ -22,14 +22,14 @@ export const NewAccountSheet = () => {
     };
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>
-            <SheetContent className="space-y-4">
+            <SheetContent className="space-y-4 bg-neutral-50/95">
                 <SheetHeader>
-                    <SheetTitle>New Account</SheetTitle>
+                    <SheetTitle>New Category</SheetTitle>
                     <SheetDescription>
-                        Create a new account to track your transactions.
+                        Create a new category to organise your transactions.
                     </SheetDescription>
                 </SheetHeader>
-                <AccountForm
+                <CategoryForm
                     onSubmit={onSubmit}
                     disabled={mutation.isPending}
                     defaultValues={{
