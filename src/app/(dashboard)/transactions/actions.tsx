@@ -1,13 +1,13 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { useOpenAccount } from "../../../../features/accounts/hooks/use-open-account";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Edit3, MoreHorizontal } from "lucide-react";
 import { Image } from "@nextui-org/image";
-import { useDeleteAccount } from "../../../../features/accounts/api/use-delete-account";
 import { useConfirm } from "../../../../hooks/use-confirm";
 import { TrashIcon } from "@radix-ui/react-icons";
+import { useDeleteTransaction } from "../../../../features/transactions/api/use-delete-transaction";
+import { useOpenTransaction } from "../../../../features/transactions/hooks/use-open-transactions";
 
 type Props = {
    id: string;
@@ -18,8 +18,8 @@ export const Actions = ({ id }: Props) => {
       "Are you sure?",
       "You are about to delete this transaction"
    )
-   const deleteMutation = useDeleteAccount(id);
-   const { onOpen } = useOpenAccount();
+   const deleteMutation = useDeleteTransaction(id);
+   const { onOpen } = useOpenTransaction();
    const handleDelete = async () => {
       const ok = await confirm();
 

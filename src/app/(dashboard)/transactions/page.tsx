@@ -1,27 +1,48 @@
 'use client';
 
-import { FC } from 'react';
-import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card';
+import { FC, useState } from 'react';
+import { Card, CardHeader, CardBody } from '@nextui-org/card';
 import { Button } from '@nextui-org/button';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { columns } from './columns';
 import { DataTable } from '@/components/ui/data-table';
-import { useGetAccounts } from '../../../../features/accounts/api/use-get-accounts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Loader2 } from 'lucide-react';
 import { useNewTransaction } from '../../../../features/transactions/hooks/use-new-transaction';
 import { useBulkDeleteTransactions } from '../../../../features/transactions/api/use-bulk-delete-transactions';
-import { useBulkDeleteAccounts } from '../../../../features/accounts/api/use-bulk-delete-accounts';
+import { useGetTransactions } from '../../../../features/transactions/api/use-get-transactions';
+import UploadButton from './upload-button';
+import { ImportCard } from './import-card';
+
+enum VARIANTS {
+    LIST = "LIST",
+    IMPORT = "IMPORT"
+};
+const INITIAL_IMPORT_RESULTS = {
+    data: [],
+    errors: [],
+    meta: {}
+};
 
 const TransactionsPage: FC = () => {
+    const [variant, setVariants] = useState<VARIANTS>(VARIANTS.LIST)
+    const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS);
+    const onUpload = (results: typeof INITIAL_IMPORT_RESULTS) => {
+        setImportResults(results);
+        setVariants(VARIANTS.IMPORT)
+    };
+    const onCancelImport = () => {
+        setImportResults(INITIAL_IMPORT_RESULTS);
+        setVariants(VARIANTS.LIST)
+    };
     const newTransaction = useNewTransaction();
-    const deleteTransactions = useBulkDeleteAccounts();
-    const accountsQuery = useGetAccounts();
-    const accounts = accountsQuery.data || [];
+    const deleteTransactions = useBulkDeleteTransactions();
+    const transactionsQuery = useGetTransactions();
+    const transactions = transactionsQuery.data || [];
 
-    const isDisabled = accountsQuery.isLoading || deleteTransactions.isPending;
+    const isDisabled = transactionsQuery.isLoading || deleteTransactions.isPending;
 
-    if (accountsQuery.isLoading) {
+    if (transactionsQuery.isLoading) {
         return (
             <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
                 <Card className="border-none rounded shadow-sm px-6 pt-3">
@@ -38,6 +59,14 @@ const TransactionsPage: FC = () => {
         );
     }
 
+    if(variant === VARIANTS.IMPORT) {
+        return (
+            <>
+                <ImportCard data={importResults.data} onCancel={onCancelImport} onSubmit={() => {}} />
+            </>
+        )
+    }
+
     return (
         <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
             <Card className="border-none rounded shadow-sm px-6 pt-3">
@@ -45,19 +74,23 @@ const TransactionsPage: FC = () => {
                     <h1 className="text-2xl line-clamp-1 font-medium tracking-tight">
                         Transactions Page
                     </h1>
-                    <Button
-                        onClick={newTransaction.onOpen}
-                        className="bg-neutral-950 rounded text-white "
-                    >
-                        <PlusIcon className="size-4 mr-2 text-neutral-100" />
-                        Add New
-                    </Button>
+                    <div className='flex gap-3'>
+                        <Button
+                            onClick={newTransaction.onOpen}
+                            className="bg-neutral-950 rounded text-white"
+                        >
+                            <PlusIcon className="size-4 mr-2 text-neutral-100" />
+                            Add New
+                        </Button>
+                        <UploadButton onUpload={onUpload} />
+                    </div>
+
                 </CardHeader>
                 <CardBody>
                     <DataTable
                         columns={columns}
-                        data={accounts}
-                        filterKey="name"
+                        data={transactions}
+                        filterKey="payee"
                         onDelete={(row) => {
                           const ids = row.map((r) => r.original.id);
                           deleteTransactions.mutate({ ids })
