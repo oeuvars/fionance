@@ -1,8 +1,12 @@
 import { useCSVReader } from 'react-papaparse';
 import { Button } from '@/components/ui/button';
 import { IconUpload } from '@tabler/icons-react';
-import { INITIAL_IMPORT_RESULTS } from './page';
 
+const INITIAL_IMPORT_RESULTS = {
+    data: [],
+    errors: [],
+    meta: {}
+};
 interface CSVReaderRenderProps {
     getRootProps: () => Record<string, unknown>;
 }

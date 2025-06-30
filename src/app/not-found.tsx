@@ -21,7 +21,7 @@ const NotFound = () => {
                 Page Not Found
               </h2>
               <p className="text-sm lg:text-base text-[#89b6fd] mb-8 max-w-md">
-                Sorry, we couldn't find the page you're looking for. The page might have been moved, deleted, or you entered the wrong URL.
+                Sorry, we couldn&apos;t find the page you&apos;re looking for. The page might have been moved, deleted, or you entered the wrong URL.
               </p>
             </div>
             

@@ -5,7 +5,7 @@ import {
     SheetHeader,
     SheetTitle,
 } from '@/components/ui/sheet';
-import { CategoryForm, FormValues } from './category-form';
+import { CategoryForm, FormValues, MultiCategoryFormValues } from './category-form';
 import { useOpenCategory } from '../hooks/use-open-category';
 import { useGetCategory } from '../api/use-get-category';
 import { useEditCategory } from '../api/use-edit-category';
@@ -28,12 +28,14 @@ export const EditCategorySheet = () => {
 
     const isLoading = accountQuery.isLoading;
 
-    const onSubmit = (values: FormValues) => {
-        editMutation.mutate(values, {
-            onSuccess: () => {
-                onClose();
-            },
-        });
+    const onSubmit = (values: FormValues | MultiCategoryFormValues) => {
+        if ('name' in values) {
+            editMutation.mutate(values, {
+                onSuccess: () => {
+                    onClose();
+                },
+            });
+        }
     };
 
     const onDelete = async () => {

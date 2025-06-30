@@ -89,7 +89,7 @@ export const Select = ({
                                 className="mx-1 px-3 py-2 text-sm rounded-md cursor-pointer hover:bg-neutral-800 hover:text-white"
                                 onClick={handleCreate}
                             >
-                                Create "{inputValue}"
+                                Create &apos;{inputValue}&apos;
                             </div>
                         )}
                     </div>

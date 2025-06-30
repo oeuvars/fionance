@@ -43,7 +43,7 @@ export const IncomeSetup = ({ onSubmit, disabled }: Props) => {
         <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-sm">
             <div className="mb-6">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Welcome to Fionance!</h2>
-                <p className="text-gray-600">Let's set up your monthly income to get started.</p>
+                <p className="text-gray-600">Let&apos;s set up your monthly income to get started.</p>
             </div>
             
             <Form {...form}>
