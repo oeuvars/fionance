@@ -10,6 +10,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { WelcomeMessage } from './welcome-message';
 import { Navigation } from './navigation';
+import { BalanceDisplay } from '../../features/balance/components/balance-display';
 
 const UserButtonComponent: FC = () => {
   const { data: session, isPending } = useSession();
@@ -63,7 +64,10 @@ const Header: FC = () => {
                <HeaderLogo />
                <Navigation />
             </div>
-            <UserButtonComponent />
+            <div className='flex items-center gap-x-4'>
+               <BalanceDisplay />
+               <UserButtonComponent />
+            </div>
          </div>
          <WelcomeMessage />
       </div>

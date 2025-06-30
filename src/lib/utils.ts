@@ -21,3 +21,12 @@ export function formatCurrency(value: number) {
     minimumFractionDigits: 2
   }).format(finalValue);
 }
+
+export function formatCurrencyINR(value: number) {
+  const finalValue = convertAmountFromMiliunits(value);
+  return Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 2
+  }).format(finalValue);
+}

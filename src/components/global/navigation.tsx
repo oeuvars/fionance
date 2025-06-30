@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { FC, useState } from "react"
 import NavButton from "./nav-button"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
-import { IconMenu } from "@tabler/icons-react"
+import { IconMenu2 } from "@tabler/icons-react"
 import { Button } from "../ui/button"
 import { useMediaQuery } from "@/hooks/use-media-query"
 
@@ -47,7 +47,7 @@ export const Navigation: FC = () => {
          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
                <button className="px-3 py-1.5 rounded-lg font-normal bg-white/10 hover:bg-white border-none focus-visible:ring-offset-0 focus-visible:ring-transparent outline-none text-white focus:bg-white/30 transition">
-                  <IconMenu className="size-6"/>
+                  <IconMenu2 className="size-6"/>
                </button>
             </SheetTrigger>
             <SheetContent side="left" className="px-2 bg-white/30 backdrop-blur-2xl border-none">

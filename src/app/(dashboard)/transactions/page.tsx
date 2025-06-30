@@ -45,7 +45,7 @@ const TransactionsPage: FC = () => {
     if (transactionsQuery.isLoading) {
         return (
             <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
-                <Card className="border-none rounded shadow-sm px-6 pt-3">
+                <Card className="border-none rounded-lg shadow-sm px-0 md:px-6 pt-3">
                     <CardHeader>
                         <Skeleton className="h-8 w-48" />
                     </CardHeader>
@@ -69,7 +69,7 @@ const TransactionsPage: FC = () => {
 
     return (
         <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
-            <Card className="border-none rounded shadow-sm px-6 pt-3">
+            <Card className="border-none rounded-lg shadow-sm px-0 md:px-6 pt-3">
                 <CardHeader className="w-full gap-y-2 phone:grid tablet:flex tablet:flex-row lg:items-center lg:justify-between">
                     <h1 className="text-2xl line-clamp-1 font-medium tracking-tight">
                         Transactions Page

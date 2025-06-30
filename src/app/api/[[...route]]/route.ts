@@ -4,6 +4,7 @@ import accounts from "./account"
 import categories from "./categories"
 import transactions from "./transactions"
 import settings from "./settings"
+import balance from "./balance"
 import { HTTPException } from "hono/http-exception";
 import { auth } from "../../../lib/auth-server";
 import { cors } from "hono/cors";
@@ -49,9 +50,7 @@ app.onError((err, c) => {
    }
 })
 
-const routes = app.route("/accounts", accounts).route('/categories', categories).route('/transactions', transactions).route('/settings', settings)
-
-console.log("routes", routes)
+const routes = app.route("/accounts", accounts).route('/categories', categories).route('/transactions', transactions).route('/settings', settings).route('/balance', balance)
 
 export const GET = handle(app);
 export const POST = handle(app);

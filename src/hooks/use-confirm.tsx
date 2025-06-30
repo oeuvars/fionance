@@ -33,10 +33,10 @@ export const useConfirm = (
                     <DialogDescription>{message}</DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <Button onClick={handleCancel} className="border border-neutral-700 bg-neutral-500 rounded-md">
+                    <Button onClick={handleCancel} className="bg-neutral-900 text-white rounded-md">
                         Cancel
                     </Button>
-                    <Button onClick={handleConfirm} className="bg-neutral-900 text-white rounded-md">
+                    <Button onClick={handleConfirm} variant="destructive" className="">
                         Confirm
                     </Button>
                 </DialogFooter>

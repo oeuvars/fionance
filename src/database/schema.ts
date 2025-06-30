@@ -58,6 +58,7 @@ export const userRelations = relations(user, ({ many, one }) => ({
     categories: many(categories),
     settings: one(userSettings),
     notificationSettings: one(userNotificationSettings),
+    balance: one(userBalance),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -176,6 +177,27 @@ export const userNotificationSettingsRelations = relations(userNotificationSetti
         references: [user.id],
     }),
 }));
+
+// User Balance table
+export const userBalance = pgTable('user_balance', {
+    id: text('id').primaryKey(),
+    userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+    balance: integer('balance').notNull().default(0), // stored in miliunits
+    monthlyIncomeSource: text('monthly_income_source'),
+    monthlyIncomeAmount: integer('monthly_income_amount').default(0), // stored in miliunits
+    lastCredited: timestamp('last_credited'),
+    createdAt: timestamp('created_at').notNull(),
+    updatedAt: timestamp('updated_at').notNull(),
+});
+
+export const userBalanceRelations = relations(userBalance, ({ one }) => ({
+    user: one(user, {
+        fields: [userBalance.userId],
+        references: [user.id],
+    }),
+}));
+
+export const insertUserBalanceSchema = createInsertSchema(userBalance);
 
 export const insertUserSettingsSchema = createInsertSchema(userSettings);
 export const insertUserNotificationSettingsSchema = createInsertSchema(userNotificationSettings);

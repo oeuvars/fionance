@@ -8,35 +8,49 @@ import {
 import { useNewCategory } from '../hooks/use-new-category';
 import { CategoryForm, FormValues, MultiCategoryFormValues } from './category-form';
 import { useCreateCategory } from '../api/use-create-category';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 export const NewCategorySheet = () => {
     const { isOpen, onClose } = useNewCategory();
     const mutation = useCreateCategory();
+    const [key, setKey] = useState<number>(0);
 
-    const onSubmit = (values: FormValues | MultiCategoryFormValues) => {
+    const handleClose = () => {
+        onClose();
+        setKey(prev => prev + 1);
+    };
+
+    const { showToast } = useToast()
+
+    const onSubmit = async (values: FormValues | MultiCategoryFormValues) => {
         if ('categories' in values) {
-            const promises = values.categories.map(name => 
-                new Promise((resolve, reject) => {
-                    mutation.mutate({ name }, {
-                        onSuccess: resolve,
-                        onError: reject,
+            try {
+                for (const name of values.categories) {
+                    await new Promise<void>((resolve, reject) => {
+                        mutation.mutate({ name }, {
+                            onSuccess: () => resolve(),
+                            onError: (error) => reject(error),
+                        });
                     });
+                }
+                handleClose();
+            } catch (error) {
+                showToast({
+                    message: "Some error occured",
+                    type: "error"
                 })
-            );
-            
-            Promise.all(promises)
-                .then(() => onClose())
-                .catch(() => {});
+            }
         } else {
             mutation.mutate(values, {
                 onSuccess: () => {
-                    onClose();
+                    handleClose();
                 },
             });
         }
     };
     return (
-        <Sheet open={isOpen} onOpenChange={onClose}>
+        <Sheet open={isOpen} onOpenChange={handleClose}>
             <SheetContent className="space-y-4">
                 <SheetHeader>
                     <SheetTitle>New Categories</SheetTitle>
@@ -45,6 +59,7 @@ export const NewCategorySheet = () => {
                     </SheetDescription>
                 </SheetHeader>
                 <CategoryForm
+                    key={key}
                     onSubmit={onSubmit}
                     disabled={mutation.isPending}
                     defaultValues={{

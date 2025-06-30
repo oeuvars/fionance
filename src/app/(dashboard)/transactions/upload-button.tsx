@@ -15,7 +15,7 @@ export const UploadButton = ({ onUpload }: { onUpload: (results: typeof INITIAL_
         <CSVReader onUploadAccepted={onUpload}>
             {({ getRootProps }: CSVReaderRenderProps) => (
                 <Button
-                    className="w-full h-auto font-normal text-sm lg:w-auto bg-neutral-800 rounded-md text-white"
+                    className="max-w-max h-auto font-normal text-sm lg:w-auto bg-neutral-800 rounded-md text-white"
                     {...getRootProps()}
                 >
                     <IconUpload className="size-4 mr-2 text-neutral-100" />

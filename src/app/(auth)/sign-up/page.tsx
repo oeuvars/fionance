@@ -39,7 +39,6 @@ export default function SignUpPage() {
       }
     } catch (err) {
       setError("An error occurred during sign up");
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -54,7 +53,6 @@ export default function SignUpPage() {
       });
     } catch (err) {
       setError("Google sign up failed");
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +67,6 @@ export default function SignUpPage() {
       });
     } catch (err) {
       setError("GitHub sign up failed");
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -158,7 +155,7 @@ export default function SignUpPage() {
               </div>
             </div>
             {error && (
-              <div className="text-sm text-red-600 bg-red-50 p-3 rounded">
+              <div className="text-sm text-red-600 p-3 rounded">
                 {error}
               </div>
             )}

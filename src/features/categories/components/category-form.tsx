@@ -5,11 +5,15 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconPlus, IconTrash, IconX } from '@tabler/icons-react';
 
 const formSchema = z.object({
     name: z.string().min(1, 'Category name is required'),
+});
+
+const multiCategoryFormSchema = z.object({
+    name: z.string().optional(),
 });
 
 const multiCategorySchema = z.object({
@@ -32,9 +36,17 @@ export const CategoryForm = ({ id, defaultValues, onSubmit, onDelete, disabled, 
     const [categories, setCategories] = useState<string[]>([]);
     const [inputValue, setInputValue] = useState('');
     const form = useForm<FormValues>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(allowMultiple ? multiCategoryFormSchema : formSchema),
         defaultValues: defaultValues,
     });
+
+    useEffect(() => {
+        if (allowMultiple) {
+            form.setValue('name', 'placeholder');
+            form.clearErrors('name');
+        }
+    }, [allowMultiple, form]);
+    
     const handleSubmit = (values: FormValues) => {
         if (allowMultiple && categories.length > 0) {
             onSubmit({ categories });
@@ -47,7 +59,6 @@ export const CategoryForm = ({ id, defaultValues, onSubmit, onDelete, disabled, 
         if (inputValue.trim() && !categories.includes(inputValue.trim())) {
             setCategories([...categories, inputValue.trim()]);
             setInputValue('');
-            form.setValue('name', '');
         }
     };
 
@@ -112,8 +123,9 @@ export const CategoryForm = ({ id, defaultValues, onSubmit, onDelete, disabled, 
                            key={category}
                            variant='indigo'
                            className='flex items-center gap-1'
+                           size="lg"
                         >
-                           {category}
+                           <span>{category}</span>
                            <Button
                               type='button'
                               size='sm'
@@ -122,7 +134,7 @@ export const CategoryForm = ({ id, defaultValues, onSubmit, onDelete, disabled, 
                               onClick={() => removeCategory(category)}
                               disabled={disabled}
                            >
-                              <IconX className='size-3.5' />
+                              <IconX className='size-3.5 hover:text-white text-white' />
                            </Button>
                         </Badge>
                      ))}
