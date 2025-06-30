@@ -5,28 +5,136 @@
 body {
 }
 
-@layer components {
-    .clerk-avatar-box + div p {
-        @apply text-primary;
-    }
-    .clerk-profile-section-content p {
-        @apply text-primary;
-    }
-    .clerk-accordion-trigger-button p {
-        @apply text-primary;
-    }
-    .clerk-accordion-content p {
-        @apply text-primary !important;
-    }
-    .clerk-accordion-content > div > div > div > p {
-        @apply text-muted-foreground !important;
-    }
-    .clerk-user-preview-main-identifier span {
-        @apply text-primary !important;
-    }
-    .clerk-select-options-container * {
-        @apply text-primary !important;
-    }
+@layer base {
+	:root {
+		--chart-1: 221.2 83.2% 53.3%;
+		--chart-2: 212 95% 68%;
+		--chart-3: 216 92% 60%;
+		--chart-4: 210 98% 78%;
+		--chart-5: 212 97% 87%;
+
+		--header-max-width: calc(var(--page-max-width) + 24px);
+		--page-padding-default: 32px;
+		--page-max-width: 1024px;
+		--page-padding-left: max(env(safe-area-inset-left), var(--page-padding-default));
+		--page-padding-right: max(env(safe-area-inset-right), var(--page-padding-default));
+		--page-padding-y: 64px;
+		--layer-header: 49;
+		--header-top: 16px;
+		--header-height: 64px;
+
+		--white: 0 0% 100%;
+		--black: 240 2% 6%;
+		--red: 2 100% 59%;
+		--red-foreground: var(--white);
+		--orange: 33 100% 50%;
+		--yellow: 48 95% 42%;
+		--yellow-badge: 44 94% 50%;
+		--green: 140 64% 49%;
+		--green-badge: 120 70% 38%;
+		--mint: 174 100% 39%;
+		--teal: 190 60% 48%;
+		--teal-map: 172 50% 45%;
+		--cyan: 203 85% 55%;
+		--blue: 211 100% 50%;
+		--indigo: 233 60% 59%;
+		--purple: 276 70% 58%;
+		--pink: 344 100% 60%;
+		--brown: 30 26% 51%;
+		--lime: 85 100% 49%;
+
+		--gray: 240 0% 57%;
+		--gray2: 240 0% 69%;
+		--gray3: 240 0% 79%;
+		--gray4: 240 0% 83%;
+		--gray5: 240 0% 91%;
+		--gray6: 240 0% 96%;
+
+		--cyber-white: 0 0% 100%;
+		--cyber-blue: 223 100% 44.3%;
+		--cyber-light-blue: 211 100% 50%;
+		--cyber-black: 240 2% 6%;
+		--cyber-muted: 240 14.3% 96%;
+		--cyber-extra-muted: 240 10% 98%;
+		--cyber-muted-foreground: 240 3.8% 36.1%;
+		--cyber-border: 240 5.9% 90%;
+
+		--background: 0 0% 100%;
+		--foreground: 0 0% 3.9%;
+		--card: 0 0% 100%;
+		--card-foreground: 0 0% 3.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 0 0% 3.9%;
+		--primary: 0 0% 9%;
+		--primary-foreground: 0 0% 98%;
+		--secondary: 0 0% 96.1%;
+		--secondary-foreground: 0 0% 9%;
+		--muted: 0 0% 96.1%;
+		--muted-foreground: 0 0% 45.1%;
+		--extra-muted: var(--cyber-extra-muted);
+		--accent: 0 0% 96.1%;
+		--accent-foreground: 0 0% 9%;
+		--pending: 40 100% 50%;
+		--border: 0 0% 89.8%;
+		--input: 0 0% 89.8%;
+		--ring: 0 0% 3.9%;
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--chart-1: 221.2 83.2% 53.3%;
+		--chart-2: 212 95% 68%;
+		--chart-3: 216 92% 60%;
+		--chart-4: 210 98% 78%;
+		--chart-5: 212 97% 87%;
+
+		--red: 2 100% 61%;
+		--orange: 33 100% 52%;
+		--yellow: 48 95% 42%;
+		--yellow-badge: 41 96% 50%;
+		--green: 122 68% 53%;
+		--green-badge: 120 70% 41%;
+		--mint: 174 53% 61%;
+		--teal: 189 78% 56%;
+		--cyan: 203 100% 70%;
+		--blue: 212 100% 52%;
+		--indigo: 234 65% 63%;
+		--purple: 278 79% 65%;
+		--pink: 347 100% 65%;
+		--brown: 28 27% 54%;
+		--lime: 85 100% 51%;
+
+		--gray: 240 2% 57%;
+		--gray2: 240 3% 39%;
+		--gray3: 240 2% 29%;
+		--gray4: 240 3% 23%;
+		--gray5: 240 4% 18%;
+		--gray6: 240 5% 13%;
+
+		--cyber-muted: 240 5.3% 11%;
+		--cyber-extra-muted: 240 2% 8%;
+		--cyber-border: 240 3.7% 20.9%;
+		--cyber-muted-foreground: 240 5% 74.9%;
+
+		--background: 0 0% 3.9%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 3.9%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 3.9%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 9%;
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 0 0% 14.9%;
+		--muted-foreground: 0 0% 63.9%;
+		--extra-muted: var(--cyber-extra-muted);
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
+		--border: 0 0% 14.9%;
+		--input: 0 0% 14.9%;
+		--ring: 0 0% 83.1%;
+	}
 }
 
 .SheetOverlay {

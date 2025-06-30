@@ -53,7 +53,7 @@ export const Navigation: FC = () => {
             <SheetContent side="left" className="px-2 bg-white/30 backdrop-blur-2xl border-none">
                <nav className="flex flex-col gap-y-2 pt-6">
                   {routes.map((route) => (
-                     <Button key={route.href} variant={route.href === pathname ? "default" : "ghost"} onClick={() => onClick(route.href)} className="w-full justify-start">
+                     <Button key={route.href} variant={route.href === pathname ? "default" : "ghost"} onClick={() => onClick(route.href)} className="w-full justify-start shadow-none">
                         {route.label}
                      </Button>
                   ))}

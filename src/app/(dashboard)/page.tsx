@@ -7,7 +7,7 @@ export default function Home() {
   const { onOpen } = useNewAccount();
   return (
     <main className="min-h-screen">
-      <Button onClick={onOpen}>
+      <Button onClick={onOpen} className="text-sm" variant="secondary">
         Add an account
       </Button>
     </main>

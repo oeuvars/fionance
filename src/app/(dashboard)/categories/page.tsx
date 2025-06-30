@@ -41,8 +41,8 @@ const CategoriesPage: FC = () => {
         <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
             <Card className="border-none rounded shadow-sm px-6 pt-3">
                 <CardHeader className="w-full gap-y-2 phone:grid tablet:flex tablet:flex-row lg:items-center lg:justify-between">
-                    <h1 className="text-2xl line-clamp-1 font-medium tracking-tight">
-                        Categories Page
+                    <h1 className="text-2xl line-clamp-1 font-semibold tracking-tight">
+                        Categories
                     </h1>
                     <Button
                         onClick={newCategory.onOpen}

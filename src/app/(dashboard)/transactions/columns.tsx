@@ -13,7 +13,7 @@ import { CategoryColumn } from './category-column';
 import { Button } from '@/components/ui/button';
 import { IconArrowsUpDown } from '@tabler/icons-react';
 
-export type ResponseType = InferResponseType<typeof client.api.transactions.$get, 200>["data"][0]
+export type ResponseType = InferResponseType<typeof client.api.transactions.$get, 200>['data'][0];
 
 export const columns: ColumnDef<ResponseType>[] = [
     {
@@ -43,8 +43,9 @@ export const columns: ColumnDef<ResponseType>[] = [
         header: ({ column }) => {
             return (
                 <Button
-                    className="bg-transparent rounded -ml-4 text-neutral-600 font-medium"
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    variant="ghost"
+                    className='px-0 py-0 hover:bg-transparent'
                 >
                     Date
                     <IconArrowsUpDown className="size-3.5" />
@@ -52,21 +53,18 @@ export const columns: ColumnDef<ResponseType>[] = [
             );
         },
         cell: ({ row }) => {
-            const date = row.getValue("date") as Date;
-            return (
-                <span>
-                    {format(date, "dd MMMM, yyyy")}
-                </span>
-            )
-        }
+            const date = row.getValue('date') as Date;
+            return <span>{format(date, 'dd MMMM, yyyy')}</span>;
+        },
     },
     {
         accessorKey: 'category',
         header: ({ column }) => {
             return (
                 <Button
-                    className="bg-transparent rounded -ml-4 text-neutral-600 font-medium"
+                    variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    className='px-0 py-0 hover:bg-transparent'
                 >
                     Category
                     <IconArrowsUpDown className="size-3.5" />
@@ -75,17 +73,22 @@ export const columns: ColumnDef<ResponseType>[] = [
         },
         cell: ({ row }) => {
             return (
-                <CategoryColumn id={row.original.id} category={row.original.category} categoryId={row.original.categoryId}></CategoryColumn>
-            )
-        }
+                <CategoryColumn
+                    id={row.original.id}
+                    category={row.original.category}
+                    categoryId={row.original.categoryId}
+                ></CategoryColumn>
+            );
+        },
     },
     {
         accessorKey: 'payee',
         header: ({ column }) => {
             return (
                 <Button
-                    className="bg-transparent rounded -ml-4 text-neutral-600 font-medium"
+                    variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    className='px-0 py-0 hover:bg-transparent'
                 >
                     Payee
                     <IconArrowsUpDown className="size-3.5" />
@@ -98,8 +101,9 @@ export const columns: ColumnDef<ResponseType>[] = [
         header: ({ column }) => {
             return (
                 <Button
-                    className="bg-transparent rounded -ml-4 text-neutral-600 font-medium"
+                    variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    className='px-0 py-0 hover:bg-transparent'
                 >
                     Amount
                     <IconArrowsUpDown className="size-3.5" />
@@ -109,19 +113,23 @@ export const columns: ColumnDef<ResponseType>[] = [
         cell: ({ row }) => {
             const amount = parseFloat(row.getValue('amount'));
             return (
-                <Badge variant={amount < 0 ? "destructive" : "primary"} className='text-xs font-medium px-3.5 py-2.5'>
+                <Badge
+                    variant={amount < 0 ? 'destructive' : 'blue'}
+                    className="text-xs font-medium px-3.5 py-2.5"
+                >
                     {formatCurrency(amount)}
                 </Badge>
-            )
-        }
+            );
+        },
     },
     {
         accessorKey: 'account',
         header: ({ column }) => {
             return (
                 <Button
-                    className="bg-transparent rounded -ml-4 text-neutral-600 font-medium"
+                    variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    className='px-0 py-0 hover:bg-transparent'
                 >
                     Account
                     <IconArrowsUpDown className="size-3.5" />
@@ -130,12 +138,15 @@ export const columns: ColumnDef<ResponseType>[] = [
         },
         cell: ({ row }) => {
             return (
-                <AccountColumn account={row.original.account} accountId={row.original.accountId}></AccountColumn>
-            )
-        }
+                <AccountColumn
+                    account={row.original.account}
+                    accountId={row.original.accountId}
+                ></AccountColumn>
+            );
+        },
     },
     {
-        id: "actions",
-        cell: ({ row }) => <Actions id={row.original.id} />
-    }
+        id: 'actions',
+        cell: ({ row }) => <Actions id={row.original.id} />,
+    },
 ];

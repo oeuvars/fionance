@@ -20,10 +20,7 @@ export const DatePicker = ({
             <PopoverTrigger asChild>
                 <Button
                     disabled={disabled}
-                    className={cn(
-                        'w-full justify-start text-left font-normal bg-transparent rounded-md border border-neutral-300',
-                        !value && 'text-muted-foreground',
-                    )}
+                    className='w-full bg-transparent border shadow-none text-primary hover:bg-neutral-50 flex'
                 >
                     <IconCalendar className="size-4 mr-2" />
                     {value ? format(value, 'PPP') : <span>Pick a date</span>}

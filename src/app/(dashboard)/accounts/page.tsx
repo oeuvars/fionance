@@ -41,12 +41,12 @@ const AccountsPage: FC = () => {
         <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
             <Card className="border-none rounded shadow-sm px-6 pt-3">
                 <CardHeader className="w-full gap-y-2 phone:grid tablet:flex tablet:flex-row lg:items-center lg:justify-between">
-                    <h1 className="text-2xl line-clamp-1 font-medium tracking-tight">
-                        Accounts Page
+                    <h1 className="text-2xl line-clamp-1 font-semibold tracking-tight">
+                        Accounts
                     </h1>
                     <Button
                         onClick={newAccount.onOpen}
-                        className="bg-neutral-950 rounded text-white "
+                        className="bg-gradient-to-b from-indigo-700 to-indigo-500 rounded-md text-white "
                     >
                         <PlusIcon className="size-4 mr-2 text-neutral-100" />
                         Add New

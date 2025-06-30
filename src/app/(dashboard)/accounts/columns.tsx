@@ -38,8 +38,9 @@ export const columns: ColumnDef<ResponseType>[] = [
         header: ({ column }) => {
             return (
                 <Button
-                    className="bg-transparent rounded -ml-4 text-neutral-600 font-medium"
+                    variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+                    className='px-0 py-0 hover:bg-transparent'
                 >
                     Name
                     <IconArrowsUpDown className="size-3.5" />
