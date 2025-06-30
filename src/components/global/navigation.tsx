@@ -3,10 +3,10 @@
 import { usePathname, useRouter } from "next/navigation"
 import { FC, useState } from "react"
 import NavButton from "./nav-button"
-import { Button } from "@nextui-org/button"
-import { Menu } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
-import useMediaQuery from "../../../hooks/use-media-query"
+import { IconMenu } from "@tabler/icons-react"
+import { Button } from "../ui/button"
+import { useMediaQuery } from "@/hooks/use-media-query"
 
 const routes = [
    {
@@ -31,7 +31,7 @@ const routes = [
    }
 ]
 
-const Navigation: FC = () => {
+export const Navigation: FC = () => {
    const pathname = usePathname();
    const [isOpen, setIsOpen] = useState<boolean>(false);
    const router =useRouter();
@@ -47,13 +47,13 @@ const Navigation: FC = () => {
          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
                <button className="px-3 py-1.5 rounded-lg font-normal bg-white/10 hover:bg-white border-none focus-visible:ring-offset-0 focus-visible:ring-transparent outline-none text-white focus:bg-white/30 transition">
-                  <Menu className="size-6"/>
+                  <IconMenu className="size-6"/>
                </button>
             </SheetTrigger>
             <SheetContent side="left" className="px-2 bg-white/30 backdrop-blur-2xl border-none">
                <nav className="flex flex-col gap-y-2 pt-6">
                   {routes.map((route) => (
-                     <Button key={route.href} variant={route.href === pathname ? "flat" : "ghost"} onClick={() => onClick(route.href)} className="w-full justify-start">
+                     <Button key={route.href} variant={route.href === pathname ? "default" : "ghost"} onClick={() => onClick(route.href)} className="w-full justify-start">
                         {route.label}
                      </Button>
                   ))}
@@ -70,5 +70,3 @@ const Navigation: FC = () => {
       </nav>
    )
 }
-
-export default Navigation

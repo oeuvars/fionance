@@ -1,12 +1,12 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
 import { InferResponseType } from 'hono';
 import { client } from '@/lib/hono';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Actions } from './actions';
+import { Button } from '@/components/ui/button';
+import { IconArrowsUpDown } from '@tabler/icons-react';
 
 export type ResponseType = InferResponseType<typeof client.api.categories.$get, 200>["data"][0]
 
@@ -42,7 +42,7 @@ export const columns: ColumnDef<ResponseType>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                 >
                     Name
-                    <ArrowUpDown className="size-3.5" />
+                    <IconArrowsUpDown className="size-3.5" />
                 </Button>
             );
         },

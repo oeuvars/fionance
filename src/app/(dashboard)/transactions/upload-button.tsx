@@ -1,26 +1,27 @@
-import React from 'react'
-import { Upload } from 'lucide-react'
-import { useCSVReader } from "react-papaparse"
+import { useCSVReader } from 'react-papaparse';
 import { Button } from '@/components/ui/button';
+import { IconUpload } from '@tabler/icons-react';
+import { INITIAL_IMPORT_RESULTS } from './page';
 
-type Props = {
-   onUpload: (results: any) => void;
+interface CSVReaderRenderProps {
+    getRootProps: () => Record<string, unknown>;
 }
 
-const UploadButton = ({ onUpload }: Props) => {
-   const { CSVReader } = useCSVReader();
+export const UploadButton = ({ onUpload }: { onUpload: (results: typeof INITIAL_IMPORT_RESULTS) => void }) => {
+    const { CSVReader } = useCSVReader();
 
-   // Todo: Add a paywall
-   return (
-      <CSVReader onUploadAccepted={onUpload}>
-         {({ getRootProps }: any) => (
-            <Button className='w-full h-auto font-normal text-sm lg:w-auto bg-neutral-950 rounded text-white' {...getRootProps()}>
-               <Upload className='size-4 mr-2 text-neutral-100' />
-               Import
-            </Button>
-         )}
-      </CSVReader>
-   )
-}
-
-export default UploadButton
+    // Todo: Add a paywall
+    return (
+        <CSVReader onUploadAccepted={onUpload}>
+            {({ getRootProps }: CSVReaderRenderProps) => (
+                <Button
+                    className="w-full h-auto font-normal text-sm lg:w-auto bg-neutral-950 rounded text-white"
+                    {...getRootProps()}
+                >
+                    <IconUpload className="size-4 mr-2 text-neutral-100" />
+                    Import
+                </Button>
+            )}
+        </CSVReader>
+    );
+};

@@ -1,16 +1,16 @@
 'use client';
 
 import { FC } from 'react';
-import { Card, CardHeader, CardBody } from '@nextui-org/card';
-import { Button } from '@nextui-org/button';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { columns } from './columns';
 import { DataTable } from '@/components/ui/data-table';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Loader2 } from 'lucide-react';
-import { useNewCategory } from '../../../../features/categories/hooks/use-new-category';
-import { useBulkDeleteCategories } from '../../../../features/categories/api/use-bulk-delete-categories';
-import { useGetCategories } from '../../../../features/categories/api/use-get-categories';
+import { useNewCategory } from '../../../features/categories/hooks/use-new-category';
+import { useBulkDeleteCategories } from '../../../features/categories/api/use-bulk-delete-categories';
+import { useGetCategories } from '../../../features/categories/api/use-get-categories';
+import { IconLoader } from '@tabler/icons-react';
+import { Button } from '@/components/ui/button';
 
 const CategoriesPage: FC = () => {
     const newCategory = useNewCategory();
@@ -27,11 +27,11 @@ const CategoriesPage: FC = () => {
                     <CardHeader>
                         <Skeleton className="h-8 w-48" />
                     </CardHeader>
-                    <CardBody>
+                    <CardContent>
                         <div className="h-[500px] w-full flex items-center justify-center">
-                            <Loader2 className="animate-spin size-6 text-neutral-300" />
+                            <IconLoader className="animate-spin size-6 text-neutral-300" />
                         </div>
-                    </CardBody>
+                    </CardContent>
                 </Card>
             </div>
         );
@@ -52,7 +52,7 @@ const CategoriesPage: FC = () => {
                         Add New
                     </Button>
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                     <DataTable
                         columns={columns}
                         data={categories}
@@ -63,7 +63,7 @@ const CategoriesPage: FC = () => {
                         }}
                         disabled={isDisabled}
                     />
-                </CardBody>
+                </CardContent>
             </Card>
         </div>
     );

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card';
-import { Button } from '@nextui-org/button';
-import { Button as ContinueButton } from '@/components/ui/button';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { Button, Button as ContinueButton } from '@/components/ui/button';
 import { ImportTable } from './import-table';
 import { cn } from '@/lib/utils';
 
@@ -57,14 +56,14 @@ export const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
                         </ContinueButton>
                     </div>
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                   <ImportTable
                      headers={headers}
                      body={body}
                      selectedColumns={selectedColumns}
                      onTableHeadSelectChange={onTableHeadSelectChange}
                   />
-                </CardBody>
+                </CardContent>
             </Card>
         </div>
     );

@@ -1,24 +1,24 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { Card, CardHeader, CardBody } from '@nextui-org/card';
-import { Button } from '@nextui-org/button';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { columns } from './columns';
 import { DataTable } from '@/components/ui/data-table';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Loader2 } from 'lucide-react';
-import { useNewTransaction } from '../../../../features/transactions/hooks/use-new-transaction';
-import { useBulkDeleteTransactions } from '../../../../features/transactions/api/use-bulk-delete-transactions';
-import { useGetTransactions } from '../../../../features/transactions/api/use-get-transactions';
-import UploadButton from './upload-button';
+import { useNewTransaction } from '../../../features/transactions/hooks/use-new-transaction';
+import { useBulkDeleteTransactions } from '../../../features/transactions/api/use-bulk-delete-transactions';
+import { useGetTransactions } from '../../../features/transactions/api/use-get-transactions';
+import { UploadButton } from './upload-button';
 import { ImportCard } from './import-card';
+import { IconLoader } from '@tabler/icons-react';
+import { Button } from '@/components/ui/button';
 
 enum VARIANTS {
     LIST = "LIST",
     IMPORT = "IMPORT"
 };
-const INITIAL_IMPORT_RESULTS = {
+export const INITIAL_IMPORT_RESULTS = {
     data: [],
     errors: [],
     meta: {}
@@ -49,11 +49,11 @@ const TransactionsPage: FC = () => {
                     <CardHeader>
                         <Skeleton className="h-8 w-48" />
                     </CardHeader>
-                    <CardBody>
+                    <CardContent>
                         <div className="h-[500px] w-full flex items-center justify-center">
-                            <Loader2 className="animate-spin size-6 text-neutral-300" />
+                            <IconLoader className="animate-spin size-6 text-neutral-300" />
                         </div>
-                    </CardBody>
+                    </CardContent>
                 </Card>
             </div>
         );
@@ -86,7 +86,7 @@ const TransactionsPage: FC = () => {
                     </div>
 
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                     <DataTable
                         columns={columns}
                         data={transactions}
@@ -97,7 +97,7 @@ const TransactionsPage: FC = () => {
                         }}
                         disabled={isDisabled}
                     />
-                </CardBody>
+                </CardContent>
             </Card>
         </div>
     );

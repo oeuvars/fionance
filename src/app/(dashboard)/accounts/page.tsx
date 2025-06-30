@@ -1,16 +1,16 @@
 'use client';
 
 import { FC } from 'react';
-import { Card, CardHeader, CardBody, CardFooter } from '@nextui-org/card';
-import { Button } from '@nextui-org/button';
+import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import { PlusIcon } from '@radix-ui/react-icons';
-import { useNewAccount } from '../../../../features/accounts/hooks/use-new-account';
+import { useNewAccount } from '../../../features/accounts/hooks/use-new-account';
 import { columns } from './columns';
 import { DataTable } from '@/components/ui/data-table';
-import { useGetAccounts } from '../../../../features/accounts/api/use-get-accounts';
+import { useGetAccounts } from '../../../features/accounts/api/use-get-accounts';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Loader2 } from 'lucide-react';
-import { useBulkDeleteAccounts } from '../../../../features/accounts/api/use-bulk-delete-accounts';
+import { useBulkDeleteAccounts } from '../../../features/accounts/api/use-bulk-delete-accounts';
+import { IconLoader } from '@tabler/icons-react';
+import { Button } from '@/components/ui/button';
 
 const AccountsPage: FC = () => {
     const newAccount = useNewAccount();
@@ -27,11 +27,11 @@ const AccountsPage: FC = () => {
                     <CardHeader>
                         <Skeleton className="h-8 w-48" />
                     </CardHeader>
-                    <CardBody>
+                    <CardContent>
                         <div className="h-[500px] w-full flex items-center justify-center">
-                            <Loader2 className="animate-spin size-6 text-neutral-300" />
+                            <IconLoader className="animate-spin size-6 text-neutral-300" />
                         </div>
-                    </CardBody>
+                    </CardContent>
                 </Card>
             </div>
         );
@@ -52,7 +52,7 @@ const AccountsPage: FC = () => {
                         Add New
                     </Button>
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                     <DataTable
                         columns={columns}
                         data={accounts}
@@ -63,7 +63,7 @@ const AccountsPage: FC = () => {
                         }}
                         disabled={isDisabled}
                     />
-                </CardBody>
+                </CardContent>
             </Card>
         </div>
     );

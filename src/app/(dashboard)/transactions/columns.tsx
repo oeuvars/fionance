@@ -1,8 +1,6 @@
 'use client';
 
-import { Button } from '@nextui-org/button';
 import { ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
 import { InferResponseType } from 'hono';
 import { client } from '@/lib/hono';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -12,6 +10,8 @@ import { formatCurrency } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { AccountColumn } from './account-column';
 import { CategoryColumn } from './category-column';
+import { Button } from '@/components/ui/button';
+import { IconArrowsUpDown } from '@tabler/icons-react';
 
 export type ResponseType = InferResponseType<typeof client.api.transactions.$get, 200>["data"][0]
 
@@ -47,7 +47,7 @@ export const columns: ColumnDef<ResponseType>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                 >
                     Date
-                    <ArrowUpDown className="size-3.5" />
+                    <IconArrowsUpDown className="size-3.5" />
                 </Button>
             );
         },
@@ -69,7 +69,7 @@ export const columns: ColumnDef<ResponseType>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                 >
                     Category
-                    <ArrowUpDown className="size-3.5" />
+                    <IconArrowsUpDown className="size-3.5" />
                 </Button>
             );
         },
@@ -88,7 +88,7 @@ export const columns: ColumnDef<ResponseType>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                 >
                     Payee
-                    <ArrowUpDown className="size-3.5" />
+                    <IconArrowsUpDown className="size-3.5" />
                 </Button>
             );
         },
@@ -102,7 +102,7 @@ export const columns: ColumnDef<ResponseType>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                 >
                     Amount
-                    <ArrowUpDown className="size-3.5" />
+                    <IconArrowsUpDown className="size-3.5" />
                 </Button>
             );
         },
@@ -124,7 +124,7 @@ export const columns: ColumnDef<ResponseType>[] = [
                     onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                 >
                     Account
-                    <ArrowUpDown className="size-3.5" />
+                    <IconArrowsUpDown className="size-3.5" />
                 </Button>
             );
         },

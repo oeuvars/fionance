@@ -21,11 +21,11 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { Button } from '@nextui-org/button';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { TrashIcon } from '@radix-ui/react-icons';
-import { useConfirm } from '../../../hooks/use-confirm';
+import { useConfirm } from '../../hooks/use-confirm';
+import { Button } from './button';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];

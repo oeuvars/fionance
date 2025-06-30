@@ -1,7 +1,7 @@
-import React from 'react'
+import { type ReactNode } from 'react'
 import Header from '../../components/global/header'
 
-type Props = { children: React.ReactNode }
+type Props = { children: ReactNode }
 
 const layout = ({ children }: Props) => {
   return (
