@@ -46,7 +46,7 @@ const CategoriesPage: FC = () => {
                     </h1>
                     <Button
                         onClick={newCategory.onOpen}
-                        className="bg-neutral-950 rounded text-white "
+                        className="bg-neutral-800 text-white rounded-md"
                     >
                         <PlusIcon className="size-4 mr-2 text-neutral-100" />
                         Add New

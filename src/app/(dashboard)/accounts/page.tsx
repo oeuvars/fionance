@@ -46,7 +46,7 @@ const AccountsPage: FC = () => {
                     </h1>
                     <Button
                         onClick={newAccount.onOpen}
-                        className="bg-gradient-to-b from-indigo-700 to-indigo-500 rounded-md text-white "
+                        className="bg-neutral-800 text-white rounded-md"
                     >
                         <PlusIcon className="size-4 mr-2 text-neutral-100" />
                         Add New

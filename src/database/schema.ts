@@ -51,11 +51,13 @@ export const verification = pgTable('verification', {
 });
 
 // Better-auth relations
-export const userRelations = relations(user, ({ many }) => ({
+export const userRelations = relations(user, ({ many, one }) => ({
     sessions: many(session),
     authAccounts: many(account),
     bankAccounts: many(bankAccount),
     categories: many(categories),
+    settings: one(userSettings),
+    notificationSettings: one(userNotificationSettings),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -137,3 +139,43 @@ export const transactionsRelations = relations(transactions, ({ one }) => ({
 export const insertTransactionsSchema = createInsertSchema(transactions, {
     date: z.coerce.date(),
 });
+
+// User Settings tables
+export const userSettings = pgTable('user_settings', {
+    id: text('id').primaryKey(),
+    userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+    currency: text('currency').notNull().default('USD'),
+    theme: text('theme').notNull().default('system'),
+    dateFormat: text('date_format').notNull().default('MM/dd/yyyy'),
+    language: text('language').notNull().default('en'),
+    createdAt: timestamp('created_at').notNull(),
+    updatedAt: timestamp('updated_at').notNull(),
+});
+
+export const userNotificationSettings = pgTable('user_notification_settings', {
+    id: text('id').primaryKey(),
+    userId: text('user_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
+    transactionAlerts: boolean('transaction_alerts').notNull().default(true),
+    budgetWarnings: boolean('budget_warnings').notNull().default(true),
+    weeklyReports: boolean('weekly_reports').notNull().default(false),
+    securityAlerts: boolean('security_alerts').notNull().default(true),
+    createdAt: timestamp('created_at').notNull(),
+    updatedAt: timestamp('updated_at').notNull(),
+});
+
+export const userSettingsRelations = relations(userSettings, ({ one }) => ({
+    user: one(user, {
+        fields: [userSettings.userId],
+        references: [user.id],
+    }),
+}));
+
+export const userNotificationSettingsRelations = relations(userNotificationSettings, ({ one }) => ({
+    user: one(user, {
+        fields: [userNotificationSettings.userId],
+        references: [user.id],
+    }),
+}));
+
+export const insertUserSettingsSchema = createInsertSchema(userSettings);
+export const insertUserNotificationSettingsSchema = createInsertSchema(userNotificationSettings);

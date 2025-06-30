@@ -3,6 +3,7 @@ import { handle } from "hono/vercel";
 import accounts from "./account"
 import categories from "./categories"
 import transactions from "./transactions"
+import settings from "./settings"
 import { HTTPException } from "hono/http-exception";
 import { auth } from "../../../lib/auth-server";
 import { cors } from "hono/cors";
@@ -48,7 +49,9 @@ app.onError((err, c) => {
    }
 })
 
-const routes = app.route("/accounts", accounts).route('/categories', categories).route('/transactions', transactions)
+const routes = app.route("/accounts", accounts).route('/categories', categories).route('/transactions', transactions).route('/settings', settings)
+
+console.log("routes", routes)
 
 export const GET = handle(app);
 export const POST = handle(app);
